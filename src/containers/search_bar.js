@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { fetchUserReleases } from '../actions';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { fetchUserReleases } from '../actions'
 
 class SearchBar extends Component {
 
   constructor (props) {
     super(props)
-    this.state = {username: ""}
+    this.state = {username: ''}
 
     this.onInputChange = this.onInputChange.bind(this)
     this.onFormSubmit = this.onFormSubmit.bind(this)
@@ -24,7 +24,7 @@ class SearchBar extends Component {
     this.props.fetchUserReleases(this.state.username)
   }
 
-  render() {
+  render () {
     return (
 
       <form onSubmit={this.onFormSubmit} className="input-group">
@@ -38,12 +38,12 @@ class SearchBar extends Component {
           <button type="submit" className="btn btn-primary ml-2">Submit</button>
         </span>
       </form>
-    );
+    )
   }
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators( { fetchUserReleases }, dispatch)
+  return bindActionCreators({fetchUserReleases}, dispatch)
 }
 
 export default connect(null, mapDispatchToProps)(SearchBar)

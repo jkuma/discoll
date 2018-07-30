@@ -9,22 +9,25 @@ class ReleasesList extends Component {
 
     if (_.isEmpty(releases) && !_.isArray(releases)) {
       return (
-        <div>Please enter a valid discogs user...</div>
+        <div className="alert alert-info mt-2" role="alert">
+          Please enter a valid discogs user...
+        </div>
       )
     }
 
     return (
-      <ul>{
+      <div className="mt-2 mx-auto row">{
         releases.map((release) => {
           const {basic_information} = release
+
           return (
-            <li key={basic_information.id}>
+            <div key={basic_information.id} className="col-md-auto p-0">
               <ReleaseListItem title={basic_information.title}
                                image={basic_information.cover_image}/>
-            </li>
+            </div>
           )
         })
-      }</ul>
+      }</div>
     )
   }
 }

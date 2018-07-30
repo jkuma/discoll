@@ -7,7 +7,7 @@ export const FETCH_USER_RELEASES = 'fetch_user_releases';
 
 export function fetchUserReleases (username) {
   const url = `${ROOT_URL}/users/${username}/collection/folders/0/releases?token=${API_KEY}`;
-  const request = axios.get(url, {user: username});
+  const request = axios.get(url);
 
   return {
     type: FETCH_USER_RELEASES,

@@ -30,12 +30,12 @@ class SearchBar extends Component {
       <form onSubmit={this.onFormSubmit} className="input-group">
         <input
           placeholder="Type in your discogs username"
-          className="form-control"
+          className="form-control rounded"
           value={this.state.username}
           onChange={this.onInputChange}
         />
         <span className="input-group-btn">
-          <button type="submit" className="btn btn-secondary">Submit</button>
+          <button type="submit" className="btn btn-primary ml-2">Submit</button>
         </span>
       </form>
     );

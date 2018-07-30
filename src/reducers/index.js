@@ -1,6 +1,8 @@
-import ReleasesReducer from './reducer_releases'
+import UserReleasesReducer from './reducer_user_releases'
 import { combineReducers } from 'redux'
 
-const rootReducer = combineReducers({Releases: ReleasesReducer})
+const rootReducer = combineReducers({
+  userReleases: UserReleasesReducer
+})
 
 export default rootReducer

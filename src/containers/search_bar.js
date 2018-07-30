@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchReleases } from '../actions';
+import { fetchUserReleases } from '../actions';
 
 class SearchBar extends Component {
 
@@ -21,11 +21,12 @@ class SearchBar extends Component {
     event.preventDefault()
 
     // We need to go and fetch user releases.
-    this.props.fetchReleases(this.state.username)
+    this.props.fetchUserReleases(this.state.username)
   }
 
   render() {
     return (
+
       <form onSubmit={this.onFormSubmit} className="input-group">
         <input
           placeholder="Type in your discogs username"
@@ -42,7 +43,7 @@ class SearchBar extends Component {
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators( { fetchReleases }, dispatch)
+  return bindActionCreators( { fetchUserReleases }, dispatch)
 }
 
 export default connect(null, mapDispatchToProps)(SearchBar)

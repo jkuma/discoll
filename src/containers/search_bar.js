@@ -8,10 +8,11 @@ class SearchBar extends Component {
 
   constructor (props) {
     super(props)
-    this.state = {username: '', coverSize: 'large'}
+    this.state = {username: '', coverSize: 'large', items: 50}
 
     this.onInputChange = this.onInputChange.bind(this)
-    this.onSelectChange = this.onSelectChange.bind(this)
+    this.onCoverSizeChange = this.onCoverSizeChange.bind(this)
+    this.onItemsChange = this.onItemsChange.bind(this)
     this.onFormSubmit = this.onFormSubmit.bind(this)
   }
 
@@ -19,17 +20,21 @@ class SearchBar extends Component {
     this.setState({username: event.target.value})
   }
 
-  onSelectChange (event) {
+  onCoverSizeChange (event) {
     this.setState({coverSize: event.target.value})
 
     this.props.dispatch(updateCoverSize(event.target.value))
+  }
+
+  onItemsChange (event) {
+    this.setState({items: event.target.value})
   }
 
   onFormSubmit (event) {
     event.preventDefault()
 
     // We need to go and fetch user releases.
-    this.props.fetchUserReleases(this.state.username)
+    this.props.fetchUserReleases(this.state.username, this.state.items)
   }
 
   render () {
@@ -45,7 +50,7 @@ class SearchBar extends Component {
         <span className="input-group-btn">
           <button type="submit" className="btn btn-primary ml-2">Submit</button>
         </span>
-        <div id="options" className="input-group input-group-sm mt-2">
+        <div className="input-group input-group-sm mt-2">
           <div className="input-group-prepend">
             <label
               className="input-group-text"
@@ -53,11 +58,25 @@ class SearchBar extends Component {
           </div>
           <select
             className="form-control"
-            onChange={this.onSelectChange}
+            onChange={this.onCoverSizeChange}
             defaultValue={this.state.coverSize}
           >
-            <option value="small">Small covers</option>
-            <option value="large">Large covers</option>
+            <option value="small">Thumbnail</option>
+            <option value="large">Cover</option>
+          </select>
+          <div className="input-group-prepend ml-2">
+            <label
+              className="input-group-text"
+              htmlFor="inputGroupSelect01">Items</label>
+          </div>
+          <select
+            className="form-control"
+            onChange={this.onItemsChange}
+            defaultValue={this.state.coverSize}
+          >
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="250">250</option>
           </select>
         </div>
       </form>

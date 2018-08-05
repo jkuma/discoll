@@ -1,11 +1,11 @@
-import { UPDATE_COVER_SIZE } from '../actions'
+import { UPDATE_COVER_SIZE } from '../actions';
 
-export default function (state = 'large', action) {
+export default function(state = 'large', action) {
   switch (action.type) {
     case UPDATE_COVER_SIZE:
-      return action.size
+      return action.size;
 
     default:
-      return state
+      return state;
   }
 }

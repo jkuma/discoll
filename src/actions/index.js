@@ -1,35 +1,34 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const API_KEY = 'sQYKfTaoHqyGtuBvAcldPcqXfrQspFKhYtlVkrFE'
-const ROOT_URL = 'https://api.discogs.com'
+const API_KEY = 'sQYKfTaoHqyGtuBvAcldPcqXfrQspFKhYtlVkrFE';
+const ROOT_URL = 'https://api.discogs.com';
 
-export const FETCH_USER_RELEASES = 'fetch_user_releases'
-export const FETCH_NEXT_RELEASES = 'fetch_next_releases'
-export const UPDATE_COVER_SIZE = 'update_cover_size'
+export const FETCH_USER_COLLECTION = 'fetch_user_collection';
+export const FETCH_COLLECTION_NEXT_PAGE = 'fetch_collection_next_page';
+export const UPDATE_COVER_SIZE = 'update_cover_size';
 
-export function fetchUserReleases (username, items = 50) {
-  const url = `${ROOT_URL}/users/${username}/collection/folders/0/releases?token=${API_KEY}&per_page=${items}`
-  const request = axios.get(url)
+export function fetchUserCollection(username, items = 50) {
+  const url = `${ROOT_URL}/users/${username}/collection/folders/0/releases?token=${API_KEY}&per_page=${items}`;
+  const request = axios.get(url);
 
   return {
-    type: FETCH_USER_RELEASES,
+    type: FETCH_USER_COLLECTION,
     payload: request,
-  }
+  };
 }
 
-export function fetchNextReleases (url) {
-  const request = axios.get(url)
+export function fetchCollectionNextPage(url) {
+  const request = axios.get(url);
 
   return {
-    type: FETCH_NEXT_RELEASES,
-    payload: request
-  }
+    type: FETCH_COLLECTION_NEXT_PAGE,
+    payload: request,
+  };
 }
 
-export function updateCoverSize (size) {
+export function updateCoverSize(size) {
   return {
     type: UPDATE_COVER_SIZE,
-    size: size
-  }
+    size: size,
+  };
 }
-

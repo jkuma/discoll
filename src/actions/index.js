@@ -4,6 +4,7 @@ const API_KEY = 'sQYKfTaoHqyGtuBvAcldPcqXfrQspFKhYtlVkrFE'
 const ROOT_URL = 'https://api.discogs.com'
 
 export const FETCH_USER_RELEASES = 'fetch_user_releases'
+export const FETCH_NEXT_RELEASES = 'fetch_next_releases'
 export const UPDATE_COVER_SIZE = 'update_cover_size'
 
 export function fetchUserReleases (username, items = 50) {
@@ -13,6 +14,15 @@ export function fetchUserReleases (username, items = 50) {
   return {
     type: FETCH_USER_RELEASES,
     payload: request,
+  }
+}
+
+export function fetchNextReleases (url) {
+  const request = axios.get(url)
+
+  return {
+    type: FETCH_NEXT_RELEASES,
+    payload: request
   }
 }
 

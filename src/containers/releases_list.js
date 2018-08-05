@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { bindActionCreators } from 'redux';
+import Loader from '../components/loader';
 import ReleaseItem from '../components/release_item';
+import { bindActionCreators } from 'redux';
 import { fetchCollectionNextPage } from '../actions';
 
 class ReleasesList extends Component {
@@ -23,7 +24,7 @@ class ReleasesList extends Component {
 
   onScroll() {
     if (
-      (window.innerHeight + window.scrollY)
+        (window.innerHeight + window.scrollY)
         >= (document.body.offsetHeight - 500)
         && _.has(this.props.collection, 'pagination')
     ) {
@@ -43,19 +44,20 @@ class ReleasesList extends Component {
 
     if (_.isArray(releases) && !_.isEmpty(releases)) {
       return (
-        <div className="mt-2 justify-content-center row">
-          {
-            releases.map((release) => {
-              const data = release.basic_information;
+          <div className="mt-2 justify-content-center row">
+            {
+              releases.map((release) => {
+                const data = release.basic_information;
 
-              return (
-                <div key={data.id} className="col-auto p-0">
-                  <ReleaseItem data={data} />
-                </div>
-              );
-            })
-          }
-        </div>
+                return (
+                    <div key={release.instance_id} className="col-auto p-0">
+                      <ReleaseItem data={data}/>
+                    </div>
+                );
+              })
+            }
+            <Loader isLoading={this.state.isLoading} />
+          </div>
       );
     }
 

@@ -6,6 +6,10 @@ import {
 export default function(state = {}, action) {
   switch (action.type) {
     case FETCH_USER_COLLECTION:
+      if (action.error) {
+        return state;
+      }
+
       return action.payload.data;
 
     case FETCH_COLLECTION_NEXT_PAGE:

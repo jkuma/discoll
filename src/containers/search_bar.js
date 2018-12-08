@@ -45,6 +45,7 @@ class SearchBar extends Component {
               className="form-control rounded"
               onChange={this.onInputChange}
               value={this.state.username}
+              required
           />
           <span className="input-group-btn">
           <button type="submit" className="btn btn-primary ml-2">Submit</button>

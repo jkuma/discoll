@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchUserCollection, updateCoverSize } from '../actions';
+import {
+  fetchUserCollection,
+  resetError,
+  resetUserCollection,
+  updateCoverSize,
+} from '../actions';
 
 class SearchBar extends Component {
 
@@ -33,16 +38,22 @@ class SearchBar extends Component {
     event.preventDefault();
 
     // We need to go and fetch user releases.
+    this.props.dispatch(resetError());
+    this.props.dispatch(resetUserCollection());
     this.props.fetchUserCollection(this.state.username, this.state.items);
   }
 
   render() {
-    return (
+    const { errors } = this.props;
 
+    return (
         <form onSubmit={this.onFormSubmit} className="input-group">
           <input
               placeholder="Type in your discogs username"
-              className="form-control rounded"
+              className={
+                `form-control rounded
+                ${errors.hasOwnProperty('message') && 'is-invalid'}`
+              }
               onChange={this.onInputChange}
               value={this.state.username}
               required
@@ -89,4 +100,8 @@ function mapDispatchToProps(dispatch) {
   return { ...actions, dispatch };
 }
 
-export default connect(null, mapDispatchToProps)(SearchBar);
+function mapStateToProps(state) {
+  return { errors: state.errors };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

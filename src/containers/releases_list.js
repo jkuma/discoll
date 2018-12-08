@@ -31,9 +31,11 @@ class ReleasesList extends Component {
       const { pagination } = this.props.collection;
 
       if (_.has(pagination.urls, 'next') && !this.state.isLoading) {
-        this.props.fetchCollectionNextPage(pagination.urls.next).then(() => {
-          this.setState({ isLoading: false });
-        });
+        this.props.fetchCollectionNextPage(pagination.urls.next).then(
+            () => {
+              this.setState({ isLoading: false });
+            })
+        ;
         this.setState({ isLoading: true });
       }
     }
@@ -41,8 +43,9 @@ class ReleasesList extends Component {
 
   render() {
     const { releases } = this.props.collection;
+    const { errors } = this.props;
 
-    if (_.isArray(releases) && !_.isEmpty(releases)) {
+    if (!_.isEmpty(releases) && !_.has(errors, 'message')) {
       return (
           <div className="mt-2 justify-content-center row">
             {
@@ -56,7 +59,7 @@ class ReleasesList extends Component {
                 );
               })
             }
-            <Loader isLoading={this.state.isLoading} />
+            <Loader isLoading={this.state.isLoading}/>
           </div>
       );
     }
@@ -70,7 +73,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  return { collection: state.collection };
+  return { collection: state.collection, errors: state.errors };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReleasesList);
